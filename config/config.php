@@ -4,7 +4,7 @@ define('APP_NAME', 'Task Managment');
 
 $host = 'localhost';
 $dbname = 'task_managment';
-$username = '';
+$username = 'root';
 $password = '';
 
 try {
