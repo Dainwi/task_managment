@@ -1,48 +1,47 @@
-<?php 
-// include '../../includes/header.php';
+<?php
+session_start();
 include '../../includes/navbar.php';
-include '../../includes/sidebar.php'; 
+include '../../includes/sidebar.php';
 ?>
 
 <!-- Profile update -->
-
 <div x-data="setup()" :class="{ 'dark': isDark }">
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
-        <div class="h-full">
-
-            <div class="border-b-2 block md:flex">
-
-                <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
-                    <div class="flex justify-between">
-                        <span class="text-xl font-semibold block">Admin Profile</span>
-                        <a href="#" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
-                    </div>
-
-                    <span class="text-gray-600">This information is secret so be careful</span>
-                    <div class="w-full p-8 mx-2 flex justify-center">
-                        <img id="showImage" class="max-w-xs w-32 items-center border" src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200" alt="">
-                    </div>
-                </div>
-
-                <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
-                    <div class="rounded  shadow p-6">
-                        <div class="pb-6">
-                            <label for="name" class="font-semibold text-gray-700 block pb-1">Name</label>
-                            <div class="flex">
-                                <input disabled id="username" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="Jane Name" />
-                            </div>
+        <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+            <div class="h-full ml-14 mt-24 mb-10 md:ml-64">
+                <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
+                    <form action="update_profile.php" method="POST" class="space-y-6" enctype="multipart/form-data">
+                        <div class="flex flex-col">
+                            <label for="name" class="text-sm font-medium">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
                         </div>
-                        <div class="pb-4">
-                            <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
-                            <input disabled id="email" class="border-1  rounded-r px-4 py-2 w-full" type="email" value="example@example.com" />
-                            <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
+                        <div class="flex flex-col">
+                            <label for="email" class="text-sm font-medium">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
                         </div>
-                    </div>
+                        <div class="flex flex-col">
+                            <label for="password" class="text-sm font-medium">Password</label>
+                            <input type="password" id="password" name="password" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="old_password" class="text-sm font-medium">Old Password</label>
+                            <input type="password" id="old_password" name="old_password" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="profile_picture" class="text-sm font-medium">Profile Picture</label>
+                            <input type="file" id="profile_picture" name="profile_picture" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
+                            <img id="profile_picture_preview" src="" alt="Profile Picture Preview" class="mt-4 w-32 h-32 object-cover rounded-full">
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Update Profile</button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
-
         </div>
     </div>
+    <!-- ./Profile Edit Form -->
 </div>
+
 <?php include '../../includes/footer.php'; ?>
