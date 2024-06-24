@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["name"] = $row["name"];
             $_SESSION["email"] = $row["email"];
             $userId = $row["id"];
+            $name = $row["name"];
 
             if ($rememberMe) {
                 $token = bin2hex(random_bytes(16));
@@ -28,18 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 setcookie('remember_me', $token, $expiry, "/", "", false, true);
 
                 $expiryDate = date('Y-m-d H:i:s', $expiry);
-                $sql = "INSERT INTO user_tokens (user_id, token, expires_at) VALUES ('$userId', '$token', '$expiryDate')";
+                $sql = "INSERT INTO user_tokens (user_id, name, token, expires_at) VALUES ('$userId', '$name', '$token', '$expiryDate')";
                 mysqli_query($conn, $sql);
             }
             echo "success";
-            exit();
+            // exit();
         } else {
             echo "InvalidPassword";
-            exit();
+            // exit();
         }
     }else{
         echo "InvalidEmail";
-        exit();
+        // exit();
     }
 
 }

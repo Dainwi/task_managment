@@ -1,4 +1,5 @@
-<script src="../assets/js/alpine.min.js"></script>
+<!-- <script src="../assets/js/alpine.min.js"></script> -->
+ <script src="<?php echo BASE_URL ?>/assets/js/alpine.min.js"></script>
 <script>
     const setup = () => {
         const getTheme = () => {
