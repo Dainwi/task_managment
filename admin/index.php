@@ -304,4 +304,4 @@ if (!isset($_SESSION['user_id'])) {
 
 <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script> -->
 
-<?php include "../includes/footer.php" ?>
+<?php include "includes/footer.php" ?>

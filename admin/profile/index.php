@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../../includes/navbar.php';
-include '../../includes/sidebar.php';
+include '../includes/navbar.php';
+include '../includes/sidebar.php';
 ?>
 <?php
 include '../../config/config.php';
@@ -56,6 +56,7 @@ $user = mysqli_fetch_assoc($result);
     </div>
     <!-- ./Profile Edit Form -->
 </div>
+<script src="<?php echo BASE_URL ?>/assets/js/jquery.js"></script>
 <script>
     $(document).ready(function() {
         $('form').on('submit', function(e) {
@@ -93,4 +94,4 @@ $user = mysqli_fetch_assoc($result);
         });
     });
 </script>
-<?php include '../../includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>
