@@ -1,10 +1,31 @@
 <?php
-include 'header.php';
+// include 'header.php';
 // session_start();
+
+$user_id = $_SESSION['user_id'];
+// Query to get the image path from the database
+$sql = "SELECT profile_picture FROM users WHERE id = $user_id";
+$result = $conn->query($sql);
+
+// Default image URL
+$default_image_url = "https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg";
+
+// Check if the query returned a result
+if ($result->num_rows > 0) {
+    // Fetch the result as an associative array
+    $row = $result->fetch_assoc();
+    $image_path = $row['profile_picture'];
+} else {
+    // Set image path to null if no result
+    $image_path = null;
+}
+
+// Use the image path from the database if it exists, otherwise use the default image URL
+$image_url = $image_path ? $image_path : $default_image_url;
 ?>
 <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
 <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-    <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+    <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="<?php echo $image_url ?>" />
     <span class="hidden md:block"><?php echo $_SESSION['name']; ?></span>
 </div>
 <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">

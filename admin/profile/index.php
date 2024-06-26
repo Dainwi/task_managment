@@ -1,7 +1,8 @@
 <?php
 session_start();
-include '../includes/navbar.php';
-include '../includes/sidebar.php';
+include '../includes/header.php';
+// include '../includes/navbar.php';
+// include '../includes/sidebar.php';
 ?>
 <?php
 include '../../config/config.php';
@@ -17,6 +18,13 @@ $user = mysqli_fetch_assoc($result);
 <!-- Profile update -->
 <div x-data="setup()" :class="{ 'dark': isDark }">
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+          <!-- Navbar -->
+          <?php include "../includes/navbar.php" ?>
+        <!-- ./Navbar -->
+
+        <!-- Sidebar -->
+        <?php include "../includes/sidebar.php" ?>
+        <!-- ./Sidebar -->
         <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
             <div class="h-full ml-14 mt-24 mb-10 md:ml-64">
                 <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">

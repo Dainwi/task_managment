@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
         $_SESSION['name'] = $name;
 
         // Redirect to admin
-        redirect(BASE_URL . '/admin');
+        redirect(BASE_URL . '/admin/dashboard');
     } else {
         // Invalid or expired token, clear the cookie
         setcookie('remember_me', '', time() - 3600, "/", "", false, true);
@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
     }
 } elseif (isset($_SESSION['user_id'])) {
     // User is already logged in, redirect to admin
-    redirect(BASE_URL . '/admin');
+    redirect(BASE_URL . '/admin/dashboard');
 } else {
     // User is not logged in, redirect to login page
     redirect(BASE_URL . '/login');

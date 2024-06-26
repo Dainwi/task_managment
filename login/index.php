@@ -44,7 +44,7 @@
 				},
 				success: function(response) {
 					if (response == "success") {
-						window.location.href = "<?php echo BASE_URL . '/admin' ?>";
+						window.location.href = "<?php echo BASE_URL . '/admin/dashboard' ?>";
 					} else {
 						alert(response);
 					}
