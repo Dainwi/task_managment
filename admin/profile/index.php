@@ -79,9 +79,11 @@ $user = mysqli_fetch_assoc($result);
                 processData: false,
                 success: function(response) {
                     alert(response);
+                    window.location.reload();
                 },
                 error: function() {
                     alert('Error updating profile');
+                    window.location.reload();
                 }
             });
         });

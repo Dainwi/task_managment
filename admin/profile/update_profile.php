@@ -29,7 +29,8 @@ if (!empty($password)) {
 }
 
 // Handle profile picture upload
-$profile_picture = $user['profile_picture'];
+// $profile_picture = $user['profile_picture'];
+$profile_picture = '';
 if (!empty($_FILES['profile_picture']['name'])) {
     $file = $_FILES['profile_picture'];
     if ($file['size'] <= 1048576) {
