@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'task_management';
+$dbname = 'task_managment';
 $username = 'root';
 $password = '';
 
