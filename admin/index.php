@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../config/config.php";
+include "../config/constant.php";
 
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
     $token = $_COOKIE['remember_me'];

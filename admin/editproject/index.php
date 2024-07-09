@@ -60,7 +60,8 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+ <script src="<?php echo BASE_URL ?>/assets/js/jquery.js"></script>
 <script>
     $(document).ready(function() {
         var taskCount = <?php echo count($tasks); ?>;
@@ -74,33 +75,36 @@ if (isset($_GET['id'])) {
                 '<button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded remove-task-btn">Remove</button>' +
                 '</div>'
             );
+
         });
 
         $(document).on('click', '.remove-task-btn', function(e) {
-    e.preventDefault();
-    
-    const taskId = $(this).data('task-id');
-    const $taskElement = $(this).parent();
-    
-    $.ajax({
-        url: 'remove_task.php', // PHP script to handle the deletion
-        type: 'POST',
-        data: { id: taskId },
-        success: function(response) {
-            // On success, remove the task element from the DOM
-            if (response === 'success') {
-                $taskElement.remove();
-                window.location.reload();
-            } else {
-                console.error('Failed to remove task:', response);
-            }
-        },
-        error: function(xhr, status, error) {
-            // Handle any errors here
-            console.error('Failed to remove task:', error);
-        }
-    });
-});
+            e.preventDefault();
+
+            const taskId = $(this).data('task-id');
+            const $taskElement = $(this).parent();
+
+            $.ajax({
+                url: 'remove_task.php',
+                type: 'POST',
+                data: {
+                    id: taskId
+                },
+                success: function(response) {
+                    if (response === 'success') {
+                        $taskElement.remove();
+                        window.location.reload();
+                    } else {
+                        // console.error('Failed to remove task:', response);
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle any errors here
+                    console.error('Failed to remove task:', error);
+                }
+            });
+        });
 
 
 

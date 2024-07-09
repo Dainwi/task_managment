@@ -14,8 +14,8 @@ include '../includes/header.php';
         <?php include "../includes/sidebar.php" ?>
         <!-- ./Sidebar -->
 
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-            <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
+        <div class="h-full ml-14 mt-14 mb-10 md:ml-64 p-2">
+                <div class="container sm:mx-auto mt-14">
                 <!-- Project -->
                 <div class="relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
                     <div class="rounded-t mb-0 px-0 border-0">
@@ -101,5 +101,29 @@ include '../includes/header.php';
     </div>
 </div>
 
+<script src="<?php echo BASE_URL ?>/assets/js/jquery.js"></script>
+<script>
+    function deleteProject(projectId) {
+        if (confirm('Are you sure you want to delete this project and all its tasks?')) {
+            $.ajax({
+                url: 'remove_project.php',
+                type: 'POST',
+                data: { id: projectId },
+                success: function(response) {
+                    if (response === 'success') {
+                        
+                        $('button[onclick="deleteProject(' + projectId + ')"]').closest('li').remove();
+                    } else {
+                        console.error('Failed to remove project:', response);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to remove project:', error);
+                }
+            });
+        }
+    }
 </script>
+
+
 <?php include '../includes/footer.php'; ?>

@@ -6,6 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $tasks = $_POST['tasks'];
 
+    if (empty($name)) {
+        echo json_encode(['status' => 'error', 'message' => 'Project name is required']);
+        exit;
+    }
+
     // Insert project into the projects table
     $sql = "INSERT INTO projects (name, description, user_id, created_at, updated_at) VALUES ('$name', '', 1, NOW(), NOW())";
     if ($conn->query($sql) === TRUE) {
@@ -18,10 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->query($sql_task);
         }
 
-        // echo "New project and tasks created successfully";
-        header("Location: " . BASE_URL);
+        echo json_encode(['status' => 'success', 'message' => 'Project and tasks created successfully']);
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo json_encode(['status' => 'error', 'message' => 'Error: ' . $sql . '<br>' . $conn->error]);
     }
 }
 ?>

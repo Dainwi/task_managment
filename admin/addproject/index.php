@@ -24,20 +24,21 @@ $user = mysqli_fetch_assoc($result);
             <div class="h-full ml-14 mt-24 mb-10 md:ml-64">
                 <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
                     <h1 class="text-3xl font-bold mb-4">Project Management Website</h1>
-                    <form id="project-form" method="POST" action="add_project.php">
+                    <form id="project-form">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-1/2 xl:w-1/3 p-3">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="project-title">
                                     Project Title
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="project-title" name="name" type="text" placeholder="Enter project title">
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="project-title" name="name" type="text" placeholder="Enter project title" required>
                             </div>
                         </div>
-                        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" id="add-task-btn">Add Task</button>
+                        
                         <div id="task-list" class="mt-6">
                             <!-- Task list will be displayed here -->
                         </div>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Create Project</button>
+                        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" id="add-task-btn">Add Task</button>
                     </form>
                 </div>
             </div>
@@ -52,8 +53,8 @@ $user = mysqli_fetch_assoc($result);
             e.preventDefault();
             taskCount++;
             $('#task-list').append(
-                '<div class="flex justify-between mb-4">' +
-                '<input type="text" class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" name="tasks[' + taskCount + '][title]" placeholder="Enter task ' + taskCount + '">' +
+                '<div class="flex justify-between mb-4 task-item">' +
+                '<input type="text" class="task-input w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" name="tasks[' + taskCount + '][title]" placeholder="Enter task ' + taskCount + '">' +
                 '<button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded remove-task-btn">Remove</button>' +
                 '</div>'
             );
@@ -62,6 +63,37 @@ $user = mysqli_fetch_assoc($result);
         $(document).on('click', '.remove-task-btn', function(e) {
             e.preventDefault();
             $(this).parent().remove();
+        });
+
+        $('#project-form').on('submit', function(e) {
+            e.preventDefault();
+
+            var isValid = true;
+            $('.task-input').each(function() {
+                if ($(this).val().trim() === '') {
+                    alert('Task name is required.');
+                    isValid = false;
+                    return false; 
+                }
+            });
+
+            if (isValid) {
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: 'add_project.php',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                       
+                        alert('Project and tasks created successfully.');
+                        window.location.href = "<?php echo BASE_URL; ?>";
+                    },
+                    error: function(xhr, status, error) {
+                     
+                        console.error('Error creating project:', error);
+                    }
+                });
+            }
         });
     });
 </script>

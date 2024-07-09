@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->query($sql_task);
         }
 
-        echo "successfully";
-        // header("Location: " . BASE_URL);
+        // echo "successful";
+        header("Location: " . BASE_URL."/admin/dashboard");
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
