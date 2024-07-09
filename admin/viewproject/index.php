@@ -21,7 +21,7 @@ if (!$project) {
 // Fetch project tasks
 $sql_tasks = "SELECT * FROM todos WHERE project_id = $projectId";
 $result_tasks = mysqli_query($conn, $sql_tasks);
-
+$count = 1;
 ?>
 <div x-data="setup()" :class="{ 'dark': isDark }">
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -43,8 +43,13 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
                     <ul id="task-list">
                         <?php while ($task = mysqli_fetch_assoc($result_tasks)) : ?>
                             <li class="flex lg:justify-between lg:items-center mb-2 flex-wrap task-item">
+                                <div class="w-9 h-9 rounded-full flex-shrink-0  my-2 mr-3 flex items-center justify-center">
+                                    <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
+                                        <?php echo $count; ?>
+                                    </span>
+                                </div>
                                 <span class="flex-grow task-info">
-                                    <?php echo htmlspecialchars($task['title']); ?> 
+                                    <?php echo htmlspecialchars($task['title']); ?>
                                 </span>
                                 <div class="task-controls">
                                     <select class="task-status p-2 rounded bg-gray-200 dark:bg-gray-600 dark:text-white mx-3 p-2" data-task-id="<?php echo $task['id']; ?>">
@@ -60,7 +65,8 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2 delete-task" data-task-id="<?php echo $task['id']; ?>">Delete</button>
                                 </div>
                             </li>
-                        <?php endwhile; ?>
+                        <?php $count++;
+                        endwhile; ?>
                     </ul>
                 </div>
             </div>
@@ -74,7 +80,10 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
             display: flex;
             flex-direction: column;
         }
-        .task-status, .task-priority, .delete-task {
+
+        .task-status,
+        .task-priority,
+        .delete-task {
             margin-bottom: 10px;
         }
     }
@@ -89,7 +98,10 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
             $.ajax({
                 url: 'update_task_status.php',
                 type: 'POST',
-                data: { taskId: taskId, status: newStatus },
+                data: {
+                    taskId: taskId,
+                    status: newStatus
+                },
                 success: function(response) {
                     location.reload();
                 }
@@ -102,7 +114,10 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
             $.ajax({
                 url: 'update_task_priority.php',
                 type: 'POST',
-                data: { taskId: taskId, priority: newPriority },
+                data: {
+                    taskId: taskId,
+                    priority: newPriority
+                },
                 success: function(response) {
                     location.reload();
                 }
@@ -117,7 +132,9 @@ $result_tasks = mysqli_query($conn, $sql_tasks);
             $.ajax({
                 url: 'delete_task.php',
                 type: 'POST',
-                data: { taskId: taskId },
+                data: {
+                    taskId: taskId
+                },
                 success: function(response) {
                     location.reload();
                 }

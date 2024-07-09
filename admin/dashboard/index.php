@@ -15,7 +15,7 @@ include '../includes/header.php';
         <!-- ./Sidebar -->
 
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64 p-2">
-                <div class="container sm:mx-auto mt-14">
+            <div class="container sm:mx-auto mt-14">
                 <!-- Project -->
                 <div class="relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
                     <div class="rounded-t mb-0 px-0 border-0">
@@ -37,19 +37,19 @@ include '../includes/header.php';
 
                                 <?php
                                 include "../../config/config.php";
-                                
+
 
                                 // Fetch projects
                                 $sql = "SELECT id, name, description FROM projects";
                                 $result = $conn->query($sql);
-
                                 if ($result->num_rows > 0) {
+                                    $count = 1;
                                     while ($row = $result->fetch_assoc()) {
                                         echo '<li class="flex px-4">
-                                                <div class="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
-                                                    <svg class="w-9 h-9 fill-current text-indigo-50" viewBox="0 0 36 36">
-                                                        <path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z"></path>
-                                                    </svg>
+                                                <div class="w-9 h-9 rounded-full flex-shrink-0  my-2 mr-3 flex items-center justify-center">
+                                                    <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
+                                                        ' . $count . '
+                                                    </span>
                                                 </div>
                                                 <div class="flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2">
                                                     <div class="flex-grow flex justify-between items-center">
@@ -75,11 +75,12 @@ include '../includes/header.php';
                                                     </div>
                                                 </div>
                                               </li>';
+                                        $count++;
                                     }
                                 } else {
                                     echo "<li class='text-center text-xl my-5'>No projects found <br> Please add Project to see here </li>";
                                 }
-                                  
+
 
                                 $conn->close();
                                 ?>
@@ -108,10 +109,12 @@ include '../includes/header.php';
             $.ajax({
                 url: 'remove_project.php',
                 type: 'POST',
-                data: { id: projectId },
+                data: {
+                    id: projectId
+                },
                 success: function(response) {
                     if (response === 'success') {
-                        
+
                         $('button[onclick="deleteProject(' + projectId + ')"]').closest('li').remove();
                     } else {
                         console.error('Failed to remove project:', response);
