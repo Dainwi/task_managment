@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
                                 <div class="flex justify-between mb-4">
                                     <input type="hidden" name="tasks[<?php echo $index; ?>][id]" value="<?php echo $task['id']; ?>">
                                     <input type="text" class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" name="tasks[<?php echo $index; ?>][title]" value="<?php echo $task['title']; ?>" placeholder="Enter task <?php echo $index + 1; ?>">
-                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded remove-task-btn" data-task-id="<?php echo $task['id']; ?>">Remove</button>
+                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold mx-3 py-2 px-4 rounded remove-task-btn" data-task-id="<?php echo $task['id']; ?>">Remove</button>
                                 </div>
                             <?php endforeach; ?>
                         </div>

@@ -54,7 +54,7 @@ include '../includes/header.php';
                                                 <div class="flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2">
                                                     <div class="flex-grow flex justify-between items-center">
                                                         <div class="self-center flex-grow flex justify-between items-center">
-                                                            <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100" href="#0" style="outline: none;">' . $row["name"] . '</a>
+                                                            <a class="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100" href="' . BASE_URL . '/admin/viewproject?id=' . $row["id"] . '" style="outline: none;">' . $row["name"] . '</a>
                                                             <div class="mt-1 sm:mt-0 sm:flex sm:justify-between">
                                                                 <div class="mt-1 sm:mt-0 sm:flex">
                                                                     <a href="' . BASE_URL . '/admin/editproject?id=' . $row["id"] . '" target="_self" rel="noopener noreferrer">
@@ -77,7 +77,7 @@ include '../includes/header.php';
                                               </li>';
                                     }
                                 } else {
-                                    echo "<li>No projects found</li>";
+                                    echo "<li class='text-center text-xl my-5'>No projects found <br> Please add Project to see here </li>";
                                 }
                                   
 

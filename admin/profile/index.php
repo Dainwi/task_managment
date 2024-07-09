@@ -46,7 +46,7 @@ $user = mysqli_fetch_assoc($result);
                             <input type="password" id="password" name="password" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
                         </div>
                         <div class="flex flex-col">
-                            <label for="old_password" class="text-sm font-medium">Old Password</label>
+                            <label for="old_password" class="text-sm font-medium">Password</label>
                             <input type="password" id="old_password" name="old_password" class="mt-1 p-2 border rounded dark:bg-gray-700 dark:text-white">
                         </div>
                         <div class="flex flex-col">
